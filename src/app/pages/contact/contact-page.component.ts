@@ -35,10 +35,10 @@ export default class ContactPageComponent implements OnInit {
 
     this.meta.updateTag({
       name: 'description',
-      content: 'This is my about page',
+      content: 'This is my contact page',
     });
 
-    this.meta.updateTag({ name: 'og:title', content: 'About page' });
+    this.meta.updateTag({ name: 'og:title', content: 'Contact page' });
 
     this.meta.updateTag({
       name: 'keywords',
