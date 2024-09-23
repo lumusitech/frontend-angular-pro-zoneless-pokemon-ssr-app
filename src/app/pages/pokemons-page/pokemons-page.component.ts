@@ -1,5 +1,11 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  OnInit,
+} from '@angular/core';
 import { PokemonsListComponent } from '../../pokemons/components/pokemons-list/pokemons-list.component';
+import { PokemonsService } from '../../pokemons/services/pokemons.service';
 import { PokemonListSkeletonComponent } from './ui/pokemon-list-skeleton/pokemon-list-skeleton.component';
 
 @Component({
@@ -14,7 +20,20 @@ import { PokemonListSkeletonComponent } from './ui/pokemon-list-skeleton/pokemon
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class PokemonsPageComponent implements OnInit {
-  ngOnInit(): void {}
+  private pokemonsService = inject(PokemonsService);
+
+  ngOnInit(): void {
+    this.loadPokemons();
+  }
+
+  public loadPokemons(page = 0) {
+    this.pokemonsService.loadPage(page).subscribe({
+      next: (pokemons) => {
+        console.log('onInit');
+      },
+    });
+  }
+
   // this is for client side, but not needed for server side
   // public isLoading = signal(true);
   // this is for app state
