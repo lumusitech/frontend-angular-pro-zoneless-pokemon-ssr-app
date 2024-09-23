@@ -5,10 +5,11 @@
 
 <!-- with ssr this is not needed because the first page will be loaded by the server side -->
 <!-- @if (!isLoading()) {
-<pokemons-list />
-} @else {
-<pokemon-list-skeleton />
-} -->
+  <pokemons-list />
+  } @else {
+    <pokemon-list-skeleton />
+    } -->
+<pokemons-list [pokemons]="pokemons()" />
 
 <!-- TODO: pokemons list skeleton -->
 <!-- TODO: buttons for load previous and next pokemons -->

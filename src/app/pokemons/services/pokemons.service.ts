@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { map, Observable, tap } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { SimplePokemon } from '../interfaces';
 import { PokemonAPIResponse } from '../interfaces/pokemon-api-response.interface';
 
@@ -37,8 +37,8 @@ export class PokemonsService {
           );
 
           return simplePokemons;
-        }),
-        tap(console.log)
+        })
+        // tap(console.log)
       );
   }
 }

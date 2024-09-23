@@ -3,8 +3,10 @@ import {
   Component,
   inject,
   OnInit,
+  signal,
 } from '@angular/core';
 import { PokemonsListComponent } from '../../pokemons/components/pokemons-list/pokemons-list.component';
+import { SimplePokemon } from '../../pokemons/interfaces';
 import { PokemonsService } from '../../pokemons/services/pokemons.service';
 import { PokemonListSkeletonComponent } from './ui/pokemon-list-skeleton/pokemon-list-skeleton.component';
 
@@ -21,17 +23,16 @@ import { PokemonListSkeletonComponent } from './ui/pokemon-list-skeleton/pokemon
 })
 export default class PokemonsPageComponent implements OnInit {
   private pokemonsService = inject(PokemonsService);
+  public pokemons = signal<SimplePokemon[]>([]);
 
   ngOnInit(): void {
     this.loadPokemons();
   }
 
   public loadPokemons(page = 0) {
-    this.pokemonsService.loadPage(page).subscribe({
-      next: (pokemons) => {
-        console.log('onInit');
-      },
-    });
+    this.pokemonsService
+      .loadPage(page)
+      .subscribe((pokemons) => this.pokemons.set(pokemons));
   }
 
   // this is for client side, but not needed for server side
