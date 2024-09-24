@@ -4,7 +4,8 @@
 <hr class="my-2" />
 
 <!-- with ssr this is not needed because the first page will be loaded by the server side -->
-@if (pokemons()) {
+
+@if (pokemons().length > 0) {
 <pokemons-list [pokemons]="pokemons()" />
 } @else {
 <pokemon-list-skeleton />

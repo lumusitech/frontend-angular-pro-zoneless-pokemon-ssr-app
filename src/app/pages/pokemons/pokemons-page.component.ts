@@ -69,7 +69,7 @@ export default class PokemonsPageComponent implements OnInit {
         ),
         tap(() => this.title.setTitle(`Pokemons SSR - page ${pageToLoad}`))
       )
-      .subscribe((pokemons) => this.pokemons.set(pokemons));
+      .subscribe(this.pokemons.set);
   }
 
   // this is for client side, but not needed for server side

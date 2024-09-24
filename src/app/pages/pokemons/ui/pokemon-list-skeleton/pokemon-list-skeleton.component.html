@@ -1,7 +1,7 @@
 <div class="grid grid-cols-1 gap-3 sm:grid-cols-3 md:grid-cols-5">
   <!-- 12 -->
   <!-- PokemonCard -->
-  @for( pokemon of '01234567890123456789'; track $index ) {
+  @for( pokemon of '01234567890123456789'.split(''); track $index ) {
   <!-- pokemon skeleton -->
   <div
     class="flex flex-col items-center justify-center p-4 bg-white bg-opacity-25 rounded-lg shadow-md cursor-pointer h-44"
@@ -13,13 +13,5 @@
       <div class="w-20 h-4 bg-gray-300 rounded animate-pulse"></div>
     </div>
   </div>
-
   }
-
-  <!--TODO: Si no hay -->
-  <!-- <div
-    class="flex items-center justify-center col-span-5 text-center border-white h-28"
-  >
-    there are no pokemons
-  </div> -->
 </div>
