@@ -14,6 +14,6 @@
 <!-- TODO: pokemons list skeleton -->
 <!-- TODO: buttons for load previous and next pokemons -->
 <div class="flex justify-between">
-  <button class="mt-2">previous</button>
-  <button class="mt-2">next</button>
+  <button (click)="loadPokemons(-1)" class="mt-2">previous</button>
+  <button (click)="loadPokemons(+1)" class="mt-2">next</button>
 </div>

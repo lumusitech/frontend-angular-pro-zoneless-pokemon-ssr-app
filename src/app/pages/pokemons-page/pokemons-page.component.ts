@@ -5,6 +5,10 @@ import {
   OnInit,
   signal,
 } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { Title } from '@angular/platform-browser';
+import { ActivatedRoute, Router } from '@angular/router';
+import { map, tap } from 'rxjs';
 import { PokemonsListComponent } from '../../pokemons/components/pokemons-list/pokemons-list.component';
 import { SimplePokemon } from '../../pokemons/interfaces';
 import { PokemonsService } from '../../pokemons/services/pokemons.service';
@@ -25,13 +29,46 @@ export default class PokemonsPageComponent implements OnInit {
   private pokemonsService = inject(PokemonsService);
   public pokemons = signal<SimplePokemon[]>([]);
 
+  private route = inject(ActivatedRoute);
+  private router = inject(Router);
+
+  private title = inject(Title);
+
+  public currentPage = toSignal<number>(
+    this.route.queryParams.pipe(
+      map((params) => params['page'] ?? '1'),
+      map((page) => (isNaN(+page) ? 0 : +page)),
+      map((page) => Math.max(1, page))
+    )
+  );
+
   ngOnInit(): void {
     this.loadPokemons();
+
+    console.log(this.currentPage());
+
+    // this.$route.queryParamMap.subscribe((params) => {
+    //   const page = params.get('page');
+
+    //   console.log({ page });
+
+    //   if (page) this.loadPokemons(+page);
+    // });
   }
 
   public loadPokemons(page = 0) {
+    const pageToLoad = this.currentPage()! + page;
+
     this.pokemonsService
-      .loadPage(page)
+      .loadPage(pageToLoad)
+      .pipe(
+        tap(() =>
+          // this navigate to the new page, with empty [] only add the query params
+          // and not navigate to the new page
+          this.router.navigate([], { queryParams: { page: pageToLoad } })
+        ),
+        tap(() => this.title.setTitle(`Pokemons SSR - page ${pageToLoad}`))
+      )
       .subscribe((pokemons) => this.pokemons.set(pokemons));
   }
 
