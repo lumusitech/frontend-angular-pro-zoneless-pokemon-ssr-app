@@ -4,12 +4,11 @@
 <hr class="my-2" />
 
 <!-- with ssr this is not needed because the first page will be loaded by the server side -->
-<!-- @if (!isLoading()) {
-  <pokemons-list />
-  } @else {
-    <pokemon-list-skeleton />
-    } -->
+@if (pokemons()) {
 <pokemons-list [pokemons]="pokemons()" />
+} @else {
+<pokemon-list-skeleton />
+}
 
 <!-- TODO: pokemons list skeleton -->
 <!-- TODO: buttons for load previous and next pokemons -->
