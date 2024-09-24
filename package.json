@@ -4,10 +4,11 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build": "pnpm prerender:routes && ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "serve:ssr:frontend-angular-zoneless-pokemon-ssr-app": "node dist/frontend-angular-zoneless-pokemon-ssr-app/server/server.mjs"
+    "serve:ssr:frontend-angular-zoneless-pokemon-ssr-app": "node dist/frontend-angular-zoneless-pokemon-ssr-app/server/server.mjs",
+    "prerender:routes": "node scripts/prerender-routes.js"
   },
   "private": true,
   "dependencies": {
