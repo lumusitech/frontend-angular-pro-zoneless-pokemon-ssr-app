@@ -31,7 +31,7 @@ export default class PokemonPageComponent implements OnInit {
       .loadPokemon(id)
       .pipe(
         tap(({ name, id }) => {
-          const title = `${id} - ${name}`;
+          const title = `#${id} - ${name}`;
           const description = `Page of pokemon ${name}`;
           this.title.setTitle(title);
           // 'og:title' and og:description is used by facebook and other social networks
