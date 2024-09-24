@@ -55,7 +55,6 @@ describe(`AppComponent`, () => {
   it('should create the app', () => {
     expect(compiled).toBeTruthy();
     expect(component).toBeTruthy();
-    console.log(compiled);
   });
 
   it('should render the navbar and router-outlet', () => {
