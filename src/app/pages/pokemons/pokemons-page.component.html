@@ -3,8 +3,6 @@
 
 <hr class="my-2" />
 
-<!-- with ssr this is not needed because the first page will be loaded by the server side -->
-
 @if (pokemons().length > 0) {
 <pokemons-list [pokemons]="pokemons()" />
 } @else {
@@ -14,6 +12,20 @@
 <!-- TODO: pokemons list skeleton -->
 <!-- TODO: buttons for load previous and next pokemons -->
 <div class="flex justify-between">
-  <button (click)="loadPokemons(-1)" class="mt-2">previous</button>
-  <button (click)="loadPokemons(+1)" class="mt-2">next</button>
+  <button
+    [disabled]="currentPage() === 1"
+    [routerLink]="['/pokemons/page', currentPage()! - 1]"
+    routerLinkActive="router-link-active"
+    class="mt-2"
+  >
+    previous
+  </button>
+  <button
+    [disabled]="currentPage() === 33"
+    [routerLink]="['/pokemons/page', currentPage()! + 1]"
+    routerLinkActive="router-link-active"
+    class="mt-2"
+  >
+    next
+  </button>
 </div>

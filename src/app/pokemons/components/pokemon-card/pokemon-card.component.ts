@@ -24,8 +24,4 @@ export class PokemonCardComponent {
       this.pokemon().id
     }.png`;
   });
-
-  // logEffect = effect(() => {
-  //   console.log('pokemonCard: ', this.pokemon());
-  // });
 }
